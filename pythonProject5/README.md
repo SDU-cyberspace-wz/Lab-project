@@ -1,6 +1,6 @@
 # Project 5:  SM2的软件实现优化
 
-本项目用python来做 sm2的 基础实现，包括加密解密、签名与验签和密钥协商功能，并对其中各种签名算法的验证做poc验证，并且给出推导文档。
+本项目基于 Python 实现 SM2 算法的基础功能，包括加密解密、签名与验签及密钥协商功能，并针对签名算法验证场景完成 PoC 验证，同时提供完整的推导文档。
 ##  特性 Features
 
 -  进行了SM2的加解密、签名验签和密钥协商，并给出demo
@@ -10,8 +10,14 @@
 ##  安装 Installation
 
 ```bash
-git clone https://github.com/Sunburnlyz/MyProject.git
-cd MyProject/pythonProject5
+git clone https://github.com/SDU-cyberspace-wz/Lab-project.git
+cd Lab-project/Project5
 ```
 ##  运行 Running
-三个文件分别对应SM2加解密与签名验签、密钥协商和密钥误用Poc验证，三个文件各自存在demo，可以单独运行。
+项目包含三个核心文件，分别对应以下功能：
+
+- SM2 加解密与签名验签
+- 密钥协商
+- 密钥误用 PoC 验证
+
+每个文件均包含独立的演示示例（demo），可单独运行进行功能验证。
