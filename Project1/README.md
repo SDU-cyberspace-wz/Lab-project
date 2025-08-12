@@ -1,14 +1,13 @@
 # Project 1:  SM4的软件实现和优化
 
-本项目用C++来做 sm4加密的 基础实现，包括加密功能和GCM模式下的加密签名功能，并对SM4进行性能优化。
+本项目基于 C++ 实现 SM4 加密算法的基础功能，包括核心加密功能以及 GCM 模式下的加密与签名功能，并针对 SM4 算法的性能进行了优化。
 ##  优化方案 
 
 ###  T_table优化
-由于SM4需要进行S盒查找和线性变换，因此我使用T_table，通过查表来原来的方法进行优化。
+SM4 算法的加密过程涉及 S 盒查找和线性变换等操作，为提升这些步骤的执行效率，本项目采用 T_table 优化方案，通过预先构建查找表（T_table），将原本需要实时计算的操作转换为直接查表，从而替代传统的分步计算方式，减少计算开销。
 
 ### AES-NI
-AES-NI指令集是为了优化AES加密算法而出现的，但同样适用于对SM4加密算法的优化，我们可以优化其S盒查找和线性变换的执行效率。
-
+AES-NI 是一套专为优化 AES 加密算法设计的指令集，但其高效的运算特性同样可应用于 SM4 加密算法的优化。本项目利用 AES-NI 指令集的优势，重点优化 SM4 算法中 S 盒查找和线性变换的执行效率，进一步提升加密性能。
 
 ### GCM优化
 GCM模式是一个 基于计数器模式（CTR） 的分组加密认证模式，核心由两部分组成：
@@ -21,8 +20,8 @@ GCM模式是一个 基于计数器模式（CTR） 的分组加密认证模式，
 ##  安装 Installation
 
 ```bash
-git clone https://github.com/Sunburnlyz/MyProject.git
-cd MyProject/Project1
+git clone https://github.com/SDU-cyberspace-wz/Lab-project.git
+cd Lab-project/Project1
 ```
 ##  运行 Running
-程序中给出了三种优化方法的测试用例，可以直接运行main函数进行验证。
+程序中已包含针对三种优化方法的测试用例，直接运行 main 函数即可对优化效果进行验证。
