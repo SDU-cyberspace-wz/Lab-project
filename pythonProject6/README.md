@@ -11,8 +11,8 @@
 ##  安装 Installation
 
 ```bash
-git clone https://github.com/Sunburnlyz/MyProject.git
-cd MyProject/pythonProject6
+git clone https://github.com/SDU-cyberspace-wz/Lab-project.git
+cd Lab-project/Project6
 ```
 ##  运行 Running
 main文件中存在demo，直接运行main即可。

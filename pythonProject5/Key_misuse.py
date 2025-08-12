@@ -153,8 +153,8 @@ if __name__ == "__main__":
     ZA = SM2.ZA_generate(keypair1.public,uid = b"1234567812345678")
     ZB = SM2.ZA_generate(keypair2.public,uid = b"2345678123456781")
 
-    message1 = b"I like cryptography!"
-    message2 = b"I don't like cryptography!"
+    message1 = b"I will achieve my goal!"
+    message2 = b"I must achieve my goal!"
 
     dA = keypair1.private
     dB = keypair2.private

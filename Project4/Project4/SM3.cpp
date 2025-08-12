@@ -13,7 +13,7 @@
 
 using namespace std;
 
-//SM3函数
+//SM3 Initial IV
 uint32_t IV[8] = {
     0x7380166F, 0x4914B2B9, 0x172442D7, 0xDA8A0600,
     0xA96F30BC, 0x163138AA, 0xE38DEE4D, 0xB0FB0E4E
@@ -82,7 +82,7 @@ __m256i GG_SIMD(__m256i x, __m256i y, __m256i z, int j) {
 }
 
 
-// 置换函数
+// P0 inverse_func
 uint32_t P0(uint32_t x) {
     return x ^ left_shift(x, 9) ^ left_shift(x, 17);
 }
@@ -209,7 +209,7 @@ vector<uint8_t> Message_expand(vector<uint8_t>& mess) {
 }
 
 
-//加密函数
+//encrypt_func
 void SM3_encrypt(vector<uint8_t>& message, vector<uint8_t>& hash_output) {
     vector<uint8_t> m = Message_expand(message);
     size_t blocks = m.size() / 64;
@@ -261,7 +261,6 @@ void SM3_length_extension_attack(const uint32_t IV[8], const vector<uint8_t>& da
     uint32_t V[8];
     memcpy(V, IV, sizeof(uint32_t) * 8);
 
-    // 拼接数据 + padding
     vector<uint8_t> m = data;
     uint64_t total_len = total_len_bits_before_data + data.size() * 8;
     //total_len_bits_before_data +
@@ -274,7 +273,6 @@ void SM3_length_extension_attack(const uint32_t IV[8], const vector<uint8_t>& da
         m.push_back((total_len >> (i * 8)) & 0xFF);
     }
 
-    // 分块处理
     size_t blocks = m.size() / 64;
     for (size_t i = 0; i < blocks; i++) {
         CF(V, &m[i * 64]);
@@ -380,7 +378,6 @@ bool verify_inclusion_proof(
 
 
 
-//各种情况的测试用例
 void SM3_origional_test() {
     string input = "I love SM3!";
     vector<uint8_t> message(input.begin(), input.end());
@@ -422,10 +419,10 @@ void length_extension_attack_test() {
     vector<uint8_t> suffix(data.begin(), data.end());
     vector<uint8_t> new_hash;
 
-    // 使用原始消息长度（bit）
+    // 使锟斤拷原始锟斤拷息锟斤拷锟饺ｏ拷bit锟斤拷
     uint64_t len = message.size() * 8;
     SM3_length_extension_attack(medium_hash, suffix, len, new_hash);
-    // 输出结果比较
+    // 锟斤拷锟斤拷锟斤拷锟饺斤拷
     cout << "Attack Hash:" << endl;
     for (uint8_t byte : new_hash) printf("%02x", byte);
     cout << endl;
@@ -439,7 +436,7 @@ void test_merkle_tree_with_100k_leaves() {
         string s = to_string(i);
         leaves.emplace_back(s.begin(), s.end());
     }
-    cout << "构建 Merkle 树..." << endl;
+    cout << "锟斤拷锟斤拷 Merkle 锟斤拷..." << endl;
     MerkleTree tree(leaves);
     auto root = tree.get_root();
     cout << "Merkle Root: ";
@@ -450,15 +447,14 @@ void test_merkle_tree_with_100k_leaves() {
     auto proof = tree.get_inclusion_proof(index);
     bool ok = verify_inclusion_proof(leaf_data, proof, root, index);
     if (ok) {
-        cout << " Inclusion proof ！Index " << index << endl;
+        cout << " Inclusion proof 锟斤拷Index " << index << endl;
     }
     else {
-        cout << " Inclusion proof failed！Index " << index << endl;
+        cout << " Inclusion proof failed锟斤拷Index " << index << endl;
     }
 }
 
 
-//运行main()函数
 int main() {
     SM3_origional_test();
     SM3_SIMD_test();

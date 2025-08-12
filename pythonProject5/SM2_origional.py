@@ -147,7 +147,7 @@ def sm2_decrypt(dB: int, C: bytes):
         raise ValueError("Invalid cipher: hash mismatch")
     return M
 
-#签名和验签过程
+#签名和验证签名过程
 def sm2_sign(dA: int, M: bytes, ZA):
     e = int.from_bytes(Hash(ZA + M), "big")
     while True:
